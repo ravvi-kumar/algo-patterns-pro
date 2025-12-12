@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import superjson from 'superjson';
 
 interface ProgressContextType {
   completedProblems: Set<string>;
@@ -15,36 +16,54 @@ interface ProgressContextType {
 const ProgressContext = createContext<ProgressContextType | undefined>(undefined);
 
 export const ProgressProvider: React.FC<{ children: ReactNode; totalProblemsCount: number }> = ({ children, totalProblemsCount }) => {
-  const [completedProblems, setCompletedProblems] = useState<Set<string>>(new Set());
-  const [unlockedHints, setUnlockedHints] = useState<Record<string, number>>({});
-  const [streak, setStreak] = useState<number>(0);
-  const [lastPracticeDate, setLastPracticeDate] = useState<string | null>(null);
+  // Define the shape of stored data
+  interface StoredProgressData {
+    completedProblems: Set<string>;
+    unlockedHints: Record<string, number>;
+    streak: number;
+    lastPracticeDate: string | null;
+  }
 
-  // Load from LocalStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('algoPatternProgress_v2');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        setCompletedProblems(new Set(parsed.completedProblems || []));
-        setUnlockedHints(parsed.unlockedHints || {});
-        setStreak(parsed.streak || 0);
-        setLastPracticeDate(parsed.lastPracticeDate || null);
-      } catch (e) {
-        console.error("Failed to load progress", e);
+  // Initialize state from localStorage if available
+  const getInitialState = () => {
+    try {
+      const saved = localStorage.getItem('algoPatternProgress_v2');
+      if (saved) {
+        const parsed = superjson.parse(saved) as StoredProgressData;
+        return {
+          completedProblems: new Set<string>(parsed?.completedProblems || []),
+          unlockedHints: parsed?.unlockedHints || {},
+          streak: parsed?.streak || 0,
+          lastPracticeDate: parsed?.lastPracticeDate || null
+        };
       }
+    } catch (e) {
+      console.error("Failed to parse saved progress", e);
     }
-  }, []);
+    return {
+      completedProblems: new Set<string>(),
+      unlockedHints: {},
+      streak: 0,
+      lastPracticeDate: null
+    };
+  };
 
+  const initialState = getInitialState();
+  const [completedProblems, setCompletedProblems] = useState<Set<string>>(initialState.completedProblems);
+  const [unlockedHints, setUnlockedHints] = useState<Record<string, number>>(initialState.unlockedHints);
+  const [streak, setStreak] = useState<number>(initialState.streak);
+  const [lastPracticeDate, setLastPracticeDate] = useState<string | null>(initialState.lastPracticeDate);
+
+  
   // Save to LocalStorage
   useEffect(() => {
     const data = {
-      completedProblems: Array.from(completedProblems),
+      completedProblems,
       unlockedHints,
       streak,
       lastPracticeDate
     };
-    localStorage.setItem('algoPatternProgress_v2', JSON.stringify(data));
+    localStorage.setItem('algoPatternProgress_v2', superjson.stringify(data));
   }, [completedProblems, unlockedHints, streak, lastPracticeDate]);
 
   const updateStreak = () => {
