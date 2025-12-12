@@ -27,7 +27,7 @@ export const ProgressProvider: React.FC<{ children: ReactNode; totalProblemsCoun
   // Initialize state from localStorage if available
   const getInitialState = () => {
     try {
-      const saved = localStorage.getItem('algoPatternProgress_v2');
+      const saved = localStorage.getItem('algoPatternsProgress_v2');
       if (saved) {
         const parsed = superjson.parse(saved) as StoredProgressData;
         return {
@@ -63,7 +63,7 @@ export const ProgressProvider: React.FC<{ children: ReactNode; totalProblemsCoun
       streak,
       lastPracticeDate
     };
-    localStorage.setItem('algoPatternProgress_v2', superjson.stringify(data));
+    localStorage.setItem('algoPatternsProgress_v2', superjson.stringify(data));
   }, [completedProblems, unlockedHints, streak, lastPracticeDate]);
 
   const updateStreak = () => {

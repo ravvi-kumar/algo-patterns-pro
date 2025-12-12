@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
               <Code2 className="text-primary" size={20} strokeWidth={2} />
             </div>
             <span className="font-bold text-lg text-slate-100 tracking-tight group-hover:text-white transition-colors">
-              AlgoPattern<span className="text-primary font-extrabold">.Pro</span>
+              AlgoPatterns<span className="text-primary font-extrabold">.Pro</span>
             </span>
           </Link>
           
@@ -82,7 +82,7 @@ const App: React.FC = () => {
           <footer className="bg-background border-t border-slate-900 py-12 mt-12">
             <div className="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
               <p className="mb-4 font-light text-slate-400">Master the code. Own the interview.</p>
-              <p className="text-slate-600">&copy; {new Date().getFullYear()} AlgoPattern Pro. Engineered for excellence.</p>
+              <p className="text-slate-600">&copy; {new Date().getFullYear()} Algo Patterns Pro. Engineered for excellence.</p>
             </div>
           </footer>
 

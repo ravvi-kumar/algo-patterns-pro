@@ -21,7 +21,7 @@ const LANGUAGE_DISPLAY: Record<ProgrammingLanguage, string> = {
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const getInitialState = (): ProgrammingLanguage => {
     try {
-      const saved = localStorage.getItem('algoPatternLanguage');
+      const saved = localStorage.getItem('algoPatternsLanguage');
       if (saved && saved in LANGUAGE_DISPLAY) {
         return saved as ProgrammingLanguage;
       }
@@ -34,7 +34,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [selectedLanguage, setSelectedLanguage] = useState<ProgrammingLanguage>(getInitialState());
 
   useEffect(() => {
-    localStorage.setItem('algoPatternLanguage', selectedLanguage);
+    localStorage.setItem('algoPatternsLanguage', selectedLanguage);
   }, [selectedLanguage]);
 
   const setLanguage = (language: ProgrammingLanguage) => {
