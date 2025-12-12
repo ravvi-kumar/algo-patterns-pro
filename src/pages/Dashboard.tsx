@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { PATTERNS } from '../data';
 import { useProgress } from '../context/ProgressContext';
 import { PatternDifficulty } from '../types';

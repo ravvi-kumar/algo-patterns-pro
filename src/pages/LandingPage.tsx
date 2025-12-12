@@ -1,19 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { motion } from 'framer-motion';
-import { 
-  BrainCircuit, 
-  Layers, 
-  Zap, 
-  Trophy, 
-  ChevronRight, 
-  Code2, 
-  Lock, 
+import { useUser } from '@clerk/clerk-react';
+import {
+  BrainCircuit,
+  Layers,
+  Zap,
+  Trophy,
+  ChevronRight,
+  Code2,
+  Lock,
   Unlock,
   GitBranch,
   Target,
   Lightbulb
 } from 'lucide-react';
+import {
+  SignedOut,
+  SignInButton,
+} from '@clerk/clerk-react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -30,6 +35,7 @@ const staggerContainer = {
 };
 
 const LandingPage: React.FC = () => {
+  const { isSignedIn, isLoaded } = useUser();
   return (
     <div className="min-h-screen bg-background text-slate-200 overflow-x-hidden">
       
@@ -69,20 +75,34 @@ const LandingPage: React.FC = () => {
           Stop grinding 500 random LeetCode problems. Master the 15 underlying patterns that solve 95% of interview questions.
         </motion.p>
 
-        <motion.div 
+        <motion.div
           className="flex flex-col sm:flex-row items-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <Link 
-            to="/dashboard"
-            className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-primary font-lg rounded-xl hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-slate-900"
-          >
-            Start Practicing Now
-            <ChevronRight className="ml-2 -mr-1 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            <div className="absolute inset-0 rounded-xl ring-2 ring-white/20 group-hover:ring-white/40 transition-all" />
-          </Link>
+          {isLoaded && (
+            <>
+              {isSignedIn ? (
+                <Link
+                  to="/dashboard"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-primary font-lg rounded-xl hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-slate-900"
+                >
+                  Start Practicing Now
+                  <ChevronRight className="ml-2 -mr-1 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <div className="absolute inset-0 rounded-xl ring-2 ring-white/20 group-hover:ring-white/40 transition-all" />
+                </Link>
+              ) : (
+                <SignInButton mode="modal">
+                  <button className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-primary font-lg rounded-xl hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-slate-900">
+                    Start Practicing Now
+                    <ChevronRight className="ml-2 -mr-1 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <div className="absolute inset-0 rounded-xl ring-2 ring-white/20 group-hover:ring-white/40 transition-all" />
+                  </button>
+                </SignInButton>
+              )}
+            </>
+          )}
           <a href="#how-it-works" className="text-slate-400 hover:text-white px-6 py-4 font-medium transition-colors">
             How it works
           </a>
@@ -401,15 +421,30 @@ const LandingPage: React.FC = () => {
             <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
                 Join the platform designed for long-term retention and mastery. Build the habit today.
             </p>
-            <Link 
-                to="/dashboard"
-                className="group relative inline-flex items-center justify-center px-12 py-5 font-bold text-white transition-all duration-200 bg-gradient-to-r from-primary to-indigo-600 rounded-2xl hover:scale-105 hover:shadow-2xl hover:shadow-primary/30 md:text-xl text-base ring-1 ring-white/20"
-            >
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <Code2 className="mr-3 size-5 md:size-6 group-hover:rotate-3 transition-transform" />
-                Start Mastering Patterns
-                <ChevronRight className="ml-2 size-4 md:size-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            {isLoaded && (
+              <>
+                {isSignedIn ? (
+                  <Link
+                    to="/dashboard"
+                    className="group relative inline-flex items-center justify-center px-12 py-5 font-bold text-white transition-all duration-200 bg-gradient-to-r from-primary to-indigo-600 rounded-2xl hover:scale-105 hover:shadow-2xl hover:shadow-primary/30 md:text-xl text-base ring-1 ring-white/20"
+                  >
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <Code2 className="mr-3 size-5 md:size-6 group-hover:rotate-3 transition-transform" />
+                    Start Mastering Patterns
+                    <ChevronRight className="ml-2 size-4 md:size-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                ) : (
+                  <SignInButton mode="modal">
+                    <button className="group relative inline-flex items-center justify-center px-12 py-5 font-bold text-white transition-all duration-200 bg-gradient-to-r from-primary to-indigo-600 rounded-2xl hover:scale-105 hover:shadow-2xl hover:shadow-primary/30 md:text-xl text-base ring-1 ring-white/20">
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <Code2 className="mr-3 size-5 md:size-6 group-hover:rotate-3 transition-transform" />
+                      Start Mastering Patterns
+                      <ChevronRight className="ml-2 size-4 md:size-5 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </SignInButton>
+                )}
+              </>
+            )}
         </motion.div>
       </section>
 
