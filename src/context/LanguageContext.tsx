@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import superjson from 'superjson';
-import { ProgrammingLanguage } from '../types';
+import React, { createContext, type ReactNode, useContext, useEffect, useState } from 'react';
+import { type ProgrammingLanguage } from '../types';
 
 interface LanguageContextType {
   selectedLanguage: ProgrammingLanguage;
@@ -56,6 +55,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (!context) {

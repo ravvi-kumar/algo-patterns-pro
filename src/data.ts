@@ -1,4 +1,4 @@
-import { Pattern } from './types';
+import { type Pattern } from './types';
 import { twoPointers } from './patterns/twoPointers';
 import { slidingWindow } from './patterns/slidingWindow';
 import { fastSlowPointers } from './patterns/fastSlowPointers';

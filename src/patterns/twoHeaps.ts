@@ -1,4 +1,4 @@
-import { Pattern, PatternDifficulty, Difficulty } from '../types';
+import { type Pattern, PatternDifficulty, Difficulty } from '../types';
 import { createHints } from '../utils/patternUtils';
 
 export const twoHeaps: Pattern = {

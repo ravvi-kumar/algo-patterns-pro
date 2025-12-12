@@ -1,4 +1,4 @@
-import { Hint } from '../types';
+import {type  Hint } from '../types';
 
 export const createHints = (strategy: string, pseudo: string, traps: string): Hint[] => [
   { level: 1, title: "Mental Model", content: strategy },

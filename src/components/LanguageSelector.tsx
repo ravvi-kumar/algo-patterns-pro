@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { ProgrammingLanguage } from '../types';
+import { type ProgrammingLanguage } from '../types';
 import { ChevronDown, Code2 } from 'lucide-react';
 
 export const LanguageSelector: React.FC = () => {

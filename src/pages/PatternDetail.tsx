@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router';
-import { PATTERNS } from '../data';
 import { useProgress } from '../context/ProgressContext';
 import { useLanguage } from '../context/LanguageContext';
 import { CodeBlock } from '../components/CodeBlock';
@@ -19,6 +18,7 @@ import {
   Layers
 } from 'lucide-react';
 import { PatternDifficulty } from '../types';
+import { PATTERNS } from '../data';
 
 const PatternDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -98,7 +98,7 @@ const PatternDetail: React.FC = () => {
             
             <button 
                 onClick={() => setIsAIModalOpen(true)}
-                className="w-full sm:w-auto flex-shrink-0 flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-indigo-600 hover:from-indigo-500 hover:to-indigo-500 text-white px-6 py-3 rounded-lg transition-all shadow-lg shadow-primary/20 font-semibold text-sm group"
+                className="w-full sm:w-auto shrink-0 flex items-center justify-center gap-2 bg-linear-to-r from-primary to-indigo-600 hover:from-indigo-500 hover:to-indigo-500 text-white px-6 py-3 rounded-lg transition-all shadow-lg shadow-primary/20 font-semibold text-sm group"
             >
                 <Sparkles size={18} className="text-indigo-200 group-hover:text-white transition-colors" />
                 <span>Ask AI Tutor</span>
@@ -138,7 +138,7 @@ const PatternDetail: React.FC = () => {
                   <ul className="space-y-4">
                     {pattern.keyInsights.map((insight, idx) => (
                       <li key={idx} className="flex items-start gap-3 text-slate-300 text-sm">
-                        <CheckCircle2 size={16} className="text-emerald-500 mt-0.5 flex-shrink-0" />
+                        <CheckCircle2 size={16} className="text-emerald-500 mt-0.5 shrink-0" />
                         <span className="leading-relaxed">{insight}</span>
                       </li>
                     ))}
@@ -156,7 +156,7 @@ const PatternDetail: React.FC = () => {
                   <ul className="space-y-4">
                     {pattern.commonPitfalls.map((pitfall, idx) => (
                       <li key={idx} className="flex items-start gap-3 text-slate-300 text-sm">
-                        <span className="text-rose-500 text-lg leading-none mt-[-3px]">•</span>
+                        <span className="text-rose-500 text-lg leading-none -mt-0.75">•</span>
                         <span className="leading-relaxed">{pitfall}</span>
                       </li>
                     ))}

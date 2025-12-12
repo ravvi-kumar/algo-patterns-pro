@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Problem, Difficulty } from '../types';
+import { type Problem, Difficulty } from '../types';
 import { useProgress } from '../context/ProgressContext';
 import { 
   CheckCircle, 

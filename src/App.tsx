@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { Route, Routes } from 'react-router';
 import { ProgressProvider } from './context/ProgressContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { PATTERNS } from './data';
@@ -17,7 +17,6 @@ const App: React.FC = () => {
   return (
     <LanguageProvider>
       <ProgressProvider totalProblemsCount={totalProblemsCount}>
-        
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Layout />}>

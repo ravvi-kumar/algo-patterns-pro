@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { PATTERNS } from '../data';
 import { useProgress } from '../context/ProgressContext';
 import { PatternDifficulty } from '../types';
 import { ChevronRight, Trophy, BookOpen, Activity, Flame } from 'lucide-react';
+import { PATTERNS } from '../data';
 
 const Dashboard: React.FC = () => {
   const { completedProblems, getProgressPercentage, streak } = useProgress();
