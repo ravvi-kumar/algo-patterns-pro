@@ -42,7 +42,9 @@ const Navbar: React.FC = () => {
             </SignedIn>
 
             <SignedOut>
-              <SignInButton mode="modal">
+              <SignInButton mode="modal"
+              forceRedirectUrl="/dashboard"
+              >
                 <button className="text-sm font-bold text-white bg-primary px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
                   Sign In
                 </button>
