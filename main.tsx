@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './src/App';
 import { ClerkProvider } from '@clerk/clerk-react';
 import './index.css';
+import { BrowserRouter } from 'react-router';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 if (!PUBLISHABLE_KEY) {
@@ -17,8 +18,10 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
+    <BrowserRouter>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
       <App />
     </ClerkProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
