@@ -6,6 +6,7 @@ import { PATTERNS } from './data';
 import Dashboard from './pages/Dashboard';
 import PatternDetail from './pages/PatternDetail';
 import LandingPage from './pages/LandingPage';
+import ScrollToTop from './components/ScrollToTop';
 import { Github, Code2, LayoutGrid, Menu } from 'lucide-react';
 
 const Navbar: React.FC = () => {
@@ -63,8 +64,9 @@ const App: React.FC = () => {
     <LanguageProvider>
       <ProgressProvider totalProblemsCount={totalProblemsCount}>
         <HashRouter>
+        <ScrollToTop />
         <div className="min-h-screen bg-background flex flex-col font-sans text-slate-200 selection:bg-primary/30 selection:text-primary-100">
-          
+
           <Navbar />
 
           {/* Main Content */}
