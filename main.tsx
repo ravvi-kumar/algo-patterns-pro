@@ -12,10 +12,10 @@ if (!PUBLISHABLE_KEY) {
 
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
       <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/dashboard">
+    <BrowserRouter>
         <App />
-      </ClerkProvider>
     </BrowserRouter>
+      </ClerkProvider>
   </React.StrictMode>
 );
