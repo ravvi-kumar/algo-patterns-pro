@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Routes, Route, Link, useLocation } from 'react-router';
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { ProgressProvider } from './context/ProgressContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { PATTERNS } from './data';
@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
 
             <SignedOut>
               <SignInButton mode="modal"
-              forceRedirectUrl="/#/dashboard"
+              forceRedirectUrl="/dashboard"
               >
                 <button className="text-sm font-bold text-white bg-primary px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
                   Sign In
@@ -82,7 +82,7 @@ const App: React.FC = () => {
   return (
     <LanguageProvider>
       <ProgressProvider totalProblemsCount={totalProblemsCount}>
-        <HashRouter>
+        <BrowserRouter>
         <ScrollToTop />
         <div className="min-h-screen bg-background flex flex-col font-sans text-slate-200 selection:bg-primary/30 selection:text-primary-100">
 
@@ -114,7 +114,7 @@ const App: React.FC = () => {
           </footer>
 
         </div>
-      </HashRouter>
+      </BrowserRouter>
     </ProgressProvider>
     </LanguageProvider>
   );

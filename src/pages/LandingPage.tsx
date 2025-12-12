@@ -61,7 +61,7 @@ const LandingPage: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           Don't Just Solve. <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400">
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 via-purple-400 to-indigo-400">
             Recognize the Pattern.
           </span>
         </motion.h1>
@@ -103,9 +103,18 @@ const LandingPage: React.FC = () => {
               )}
             </>
           )}
-          <a href="#how-it-works" className="text-slate-400 hover:text-white px-6 py-4 font-medium transition-colors">
+          <button
+        onClick={(e) => {
+          e.preventDefault();
+          const element = document.getElementById('how-it-works-steps');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+        className="text-slate-400 hover:text-white px-6 py-4 font-medium transition-colors"
+      >
             How it works
-          </a>
+          </button>
         </motion.div>
 
         {/* Hero Visual - Code/Pattern Abstraction */}
@@ -234,9 +243,107 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
+      {/* How It Works - Step by Step */}
+      <section id="how-it-works-steps" className="py-24 bg-slate-900/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+                className="text-center max-w-3xl mx-auto mb-16"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+            >
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">How It Works</h2>
+                <p className="text-slate-400 text-lg">
+                    Master algorithmic patterns in 4 simple steps. No more random grinding, just focused learning.
+                </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {[
+                    {
+                        step: "1",
+                        title: "Choose a Pattern",
+                        description: "Start with foundational patterns like Two Pointers or Sliding Window. Each pattern comes with detailed explanations and real-world applications.",
+                        icon: <Target size={24} className="text-indigo-400" />,
+                        color: "border-indigo-500/30"
+                    },
+                    {
+                        step: "2",
+                        title: "Learn the Mental Model",
+                        description: "Understand the core strategy and intuition behind the pattern. Learn when and why to apply it, not just how to write the code.",
+                        icon: <BrainCircuit size={24} className="text-purple-400" />,
+                        color: "border-purple-500/30"
+                    },
+                    {
+                        step: "3",
+                        title: "Practice with Problems",
+                        description: "Solve curated LeetCode problems that specifically use this pattern. Get progressive hints when stuck and build your implementation.",
+                        icon: <Code2 size={24} className="text-emerald-400" />,
+                        color: "border-emerald-500/30"
+                    },
+                    {
+                        step: "4",
+                        title: "Track Your Progress",
+                        description: "Monitor your mastery across patterns, maintain daily streaks, and see your problem-solving skills improve over time.",
+                        icon: <Trophy size={24} className="text-orange-400" />,
+                        color: "border-orange-500/30"
+                    }
+                ].map((item, index) => (
+                    <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                        className="relative"
+                    >
+                        <div className={`bg-slate-900 border ${item.color} p-6 rounded-2xl hover:border-primary/50 transition-colors group h-full`}>
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-800 group-hover:bg-slate-700 transition-colors">
+                                    <span className="text-lg font-bold text-white/80 group-hover:text-white transition-colors">
+                                        {item.step}
+                                    </span>
+                                </div>
+                                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    {item.icon}
+                                </div>
+                            </div>
+                            <h3 className="text-lg font-bold text-white mb-3">{item.title}</h3>
+                            <p className="text-slate-400 text-sm leading-relaxed">{item.description}</p>
+                        </div>
+
+                        {/* Connection lines */}
+                        {index < 3 && (
+                            <div className="hidden lg:block absolute top-1/2 -right-6 w-8 h-0.5 bg-slate-700 -translate-y-1/2">
+                                <ChevronRight className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
+                            </div>
+                        )}
+                    </motion.div>
+                ))}
+            </div>
+
+            <motion.div
+                className="text-center mt-16"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+            >
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
+                    <Zap size={16} />
+                    <span>Ready to start?</span>
+                </div>
+                <p className="text-slate-400 mb-8 max-w-2xl mx-auto">
+                    Join thousands of developers who have transformed their interview preparation with pattern-based learning.
+                </p>
+            </motion.div>
+        </div>
+      </section>
+
       {/* The 80/20 Rule Section */}
       <section className="py-24 bg-background relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/10 blur-[100px] rounded-full -z-10" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-100 bg-primary/10 blur-[100px] rounded-full -z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -306,7 +413,7 @@ const LandingPage: React.FC = () => {
                                         initial={{ width: 0 }}
                                         whileInView={{ width: "80%" }}
                                         transition={{ duration: 1, delay: 0.5 }}
-                                        className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-500 to-emerald-400"
+                                        className="absolute top-0 left-0 h-full bg-linear-to-r from-emerald-500 to-emerald-400"
                                     />
                                 </div>
                                 <p className="text-xs text-emerald-400 pt-1">Efficiency x10</p>
@@ -315,7 +422,7 @@ const LandingPage: React.FC = () => {
                     </div>
                     
                     {/* Decorative elements behind */}
-                    <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/20 to-primary/20 rounded-3xl blur-2xl -z-10 opacity-50" />
+                    <div className="absolute -inset-4 bg-linear-to-r from-emerald-500/20 to-primary/20 rounded-3xl blur-2xl -z-10 opacity-50" />
                 </motion.div>
             </div>
         </div>
@@ -400,8 +507,8 @@ const LandingPage: React.FC = () => {
                    </div>
                    
                    {/* Decor blobs */}
-                   <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-600/20 blur-3xl rounded-full -z-0"></div>
-                   <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-primary/20 blur-3xl rounded-full -z-0"></div>
+                   <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-600/20 blur-3xl rounded-full z-0"></div>
+                   <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-primary/20 blur-3xl rounded-full z-0"></div>
                </motion.div>
            </div>
       </section>
@@ -426,17 +533,17 @@ const LandingPage: React.FC = () => {
                 {isSignedIn ? (
                   <Link
                     to="/dashboard"
-                    className="group relative inline-flex items-center justify-center px-12 py-5 font-bold text-white transition-all duration-200 bg-gradient-to-r from-primary to-indigo-600 rounded-2xl hover:scale-105 hover:shadow-2xl hover:shadow-primary/30 md:text-xl text-base ring-1 ring-white/20"
+                    className="group relative inline-flex items-center justify-center px-12 py-5 font-bold text-white transition-all duration-200 bg-linear-to-r from-primary to-indigo-600 rounded-2xl hover:scale-105 hover:shadow-2xl hover:shadow-primary/30 md:text-xl text-base ring-1 ring-white/20"
                   >
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <Code2 className="mr-3 size-5 md:size-6 group-hover:rotate-3 transition-transform" />
                     Start Mastering Patterns
                     <ChevronRight className="ml-2 size-4 md:size-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 ) : (
                   <SignInButton mode="modal">
-                    <button className="group relative inline-flex items-center justify-center px-12 py-5 font-bold text-white transition-all duration-200 bg-gradient-to-r from-primary to-indigo-600 rounded-2xl hover:scale-105 hover:shadow-2xl hover:shadow-primary/30 md:text-xl text-base ring-1 ring-white/20">
-                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <button className="group relative inline-flex items-center justify-center px-12 py-5 font-bold text-white transition-all duration-200 bg-linear-to-r from-primary to-indigo-600 rounded-2xl hover:scale-105 hover:shadow-2xl hover:shadow-primary/30 md:text-xl text-base ring-1 ring-white/20">
+                      <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                       <Code2 className="mr-3 size-5 md:size-6 group-hover:rotate-3 transition-transform" />
                       Start Mastering Patterns
                       <ChevronRight className="ml-2 size-4 md:size-5 group-hover:translate-x-1 transition-transform" />
