@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AlgoPattern Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Overriding slate with a sophisticated blue-gray palette
+              slate: {
+                50: '#f2f4f8',
+                100: '#e1e4ed',
+                200: '#c4c9d7',
+                300: '#9fa7bc',
+                400: '#7c86a0',
+                500: '#5f6984',
+                600: '#485066',
+                700: '#343a4b', // Borders
+                800: '#232735', // Cards / Secondary Surface
+                900: '#161924', // Surface
+                950: '#0b0c13', // Background
+              },
+              background: '#0b0c13', // Deep rich dark
+              surface: '#161924',    // Slightly lighter
+              primary: '#6366f1',    // Indigo 500 (Sophisticated Blue/Purple)
+              secondary: '#7c86a0',  // Slate 400
+              accent: '#8b5cf6',     // Violet 500
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+            },
+            boxShadow: {
+              'glow': '0 0 20px -5px rgba(99, 102, 241, 0.15)',
+            }
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #0b0c13;
+        color: #c4c9d7; /* Slate 200 */
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0b0c13;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #343a4b;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #485066;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.10.1",
+    "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
+    "react-markdown": "https://esm.sh/react-markdown@^10.1.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.560.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-syntax-highlighter": "https://esm.sh/react-syntax-highlighter@15.5.0",
+    "react-syntax-highlighter/dist/esm/styles/prism": "https://esm.sh/react-syntax-highlighter@15.5.0/dist/esm/styles/prism",
+    "react-syntax-highlighter/": "https://esm.sh/react-syntax-highlighter@^16.1.0/",
+    "framer-motion": "https://esm.sh/framer-motion@11.18.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
