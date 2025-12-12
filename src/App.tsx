@@ -8,12 +8,12 @@ import PatternDetail from './pages/PatternDetail';
 import LandingPage from './pages/LandingPage';
 import ScrollToTop from './components/ScrollToTop';
 import ProtectedRoute from './components/ProtectedRoute';
+import UserAvatar from './components/UserAvatar';
 import { Github, Code2, LayoutGrid, Menu } from 'lucide-react';
 import {
   SignedIn,
   SignedOut,
   SignInButton,
-  UserButton,
 } from '@clerk/clerk-react';
 
 const Navbar: React.FC = () => {
@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
                   Dashboard
                </Link>
 )}
-              <UserButton afterSignOutUrl="/" />
+              <UserAvatar />
             </SignedIn>
 
           </div>
