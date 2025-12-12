@@ -174,7 +174,9 @@ const PatternDetail: React.FC = () => {
                 <p className="text-slate-500 text-sm mt-1">Universal template for {pattern.title} problems</p>
               </div>
             </div>
+            <div className='overflow-x-auto max-w-sm md:max-w-none'>
             <CodeBlock code={pattern.codeExample} />
+            </div>
           </section>
         </div>
 

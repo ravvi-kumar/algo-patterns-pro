@@ -403,12 +403,12 @@ const LandingPage: React.FC = () => {
             </p>
             <Link 
                 to="/dashboard"
-                className="group relative inline-flex items-center justify-center px-12 py-5 font-bold text-white transition-all duration-200 bg-gradient-to-r from-primary to-indigo-600 rounded-2xl hover:scale-105 hover:shadow-2xl hover:shadow-primary/30 text-xl ring-1 ring-white/20"
+                className="group relative inline-flex items-center justify-center px-12 py-5 font-bold text-white transition-all duration-200 bg-gradient-to-r from-primary to-indigo-600 rounded-2xl hover:scale-105 hover:shadow-2xl hover:shadow-primary/30 md:text-xl text-base ring-1 ring-white/20"
             >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <Code2 className="mr-3 w-6 h-6 group-hover:rotate-3 transition-transform" />
+                <Code2 className="mr-3 size-5 md:size-6 group-hover:rotate-3 transition-transform" />
                 Start Mastering Patterns
-                <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ChevronRight className="ml-2 size-4 md:size-5 group-hover:translate-x-1 transition-transform" />
             </Link>
         </motion.div>
       </section>
