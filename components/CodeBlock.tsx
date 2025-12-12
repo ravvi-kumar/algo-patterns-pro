@@ -1,3 +1,4 @@
+import { useLanguage } from '@/context/LanguageContext';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -7,6 +8,7 @@ interface CodeBlockProps {
 }
 
 export const CodeBlock: React.FC<CodeBlockProps> = ({ code }) => {
+  const { selectedLanguage } = useLanguage();
   return (
     <div className="rounded-xl overflow-hidden border border-slate-800 shadow-2xl my-6 group">
       {/* Window Controls Header */}
@@ -16,13 +18,13 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code }) => {
           <div className="w-3 h-3 rounded-full bg-slate-700 group-hover:bg-amber-500/80 transition-colors duration-300 delay-75"></div>
           <div className="w-3 h-3 rounded-full bg-slate-700 group-hover:bg-emerald-500/80 transition-colors duration-300 delay-150"></div>
         </div>
-        <span className="text-xs font-mono font-medium text-slate-500 tracking-wide uppercase">TypeScript</span>
+        <span className="text-xs font-mono font-medium text-slate-500 tracking-wide uppercase">{selectedLanguage}</span>
       </div>
       
       {/* Code Content */}
       <div className="relative bg-[#1e1e1e]">
         <SyntaxHighlighter
-          language="typescript"
+          language={selectedLanguage}
           style={vscDarkPlus}
           customStyle={{
             margin: 0,

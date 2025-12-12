@@ -17,7 +17,8 @@ export const knapsackDP: Pattern = {
     "Base Cases: \`dp[0][...]\` usually 0 (or initialized based on first item).",
     "Greedy Fails: Sorting by value/weight ratio usually fails for 0/1 Knapsack. You must use DP."
   ],
-  codeExample: `function solveKnapsack(profits: number[], weights: number[], capacity: number): number {
+  codeExample: {
+    typescript: `function solveKnapsack(profits: number[], weights: number[], capacity: number): number {
   const n = profits.length;
   // dp[c] = max profit with capacity c
   const dp = new Array(capacity + 1).fill(0);
@@ -30,6 +31,57 @@ export const knapsackDP: Pattern = {
   }
   return dp[capacity];
 }`,
+    python: `def solve_knapsack(profits: List[int], weights: List[int], capacity: int) -> int:
+    n = len(profits)
+    # dp[c] = max profit with capacity c
+    dp = [0] * (capacity + 1)
+
+    for i in range(n):
+        # Iterate BACKWARDS for 0/1 Knapsack
+        for c in range(capacity, weights[i] - 1, -1):
+            dp[c] = max(dp[c], profits[i] + dp[c - weights[i]])
+
+    return dp[capacity]`,
+    java: `public static int solveKnapsack(int[] profits, int[] weights, int capacity) {
+    int n = profits.length;
+    // dp[c] = max profit with capacity c
+    int[] dp = new int[capacity + 1];
+
+    for (int i = 0; i < n; i++) {
+        // Iterate BACKWARDS for 0/1 Knapsack
+        for (int c = capacity; c >= weights[i]; c--) {
+            dp[c] = Math.max(dp[c], profits[i] + dp[c - weights[i]]);
+        }
+    }
+    return dp[capacity];
+}`,
+    cpp: `int solveKnapsack(const vector<int>& profits, const vector<int>& weights, int capacity) {
+    int n = profits.size();
+    // dp[c] = max profit with capacity c
+    vector<int> dp(capacity + 1, 0);
+
+    for (int i = 0; i < n; i++) {
+        // Iterate BACKWARDS for 0/1 Knapsack
+        for (int c = capacity; c >= weights[i]; c--) {
+            dp[c] = max(dp[c], profits[i] + dp[c - weights[i]]);
+        }
+    }
+    return dp[capacity];
+}`,
+    javascript: `function solveKnapsack(profits, weights, capacity) {
+  const n = profits.length;
+  // dp[c] = max profit with capacity c
+  const dp = new Array(capacity + 1).fill(0);
+
+  for (let i = 0; i < n; i++) {
+    // Iterate BACKWARDS for 0/1 Knapsack
+    for (let c = capacity; c >= weights[i]; c--) {
+      dp[c] = Math.max(dp[c], profits[i] + dp[c - weights[i]]);
+    }
+  }
+  return dp[capacity];
+}`
+  },
   problems: [
     {
       id: 'dp-1',

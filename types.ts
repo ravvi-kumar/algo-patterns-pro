@@ -10,6 +10,8 @@ export enum PatternDifficulty {
   Advanced = 'Advanced',
 }
 
+export type ProgrammingLanguage = 'typescript' | 'python' | 'java' | 'cpp' | 'javascript';
+
 export interface Hint {
   level: number;
   title: string; // e.g., "Mental Model", "Pseudocode", "Traps", "Solution"
@@ -30,7 +32,7 @@ export interface Pattern {
   shortDescription: string;
   fullDescription: string;
   difficulty: PatternDifficulty;
-  codeExample: string;
+  codeExample: Record<ProgrammingLanguage, string>;
   problems: Problem[];
   keyInsights?: string[]; // The 80/20 rule content
   commonPitfalls?: string[]; // Common mistakes

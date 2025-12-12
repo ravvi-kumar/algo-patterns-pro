@@ -17,7 +17,8 @@ export const slidingWindow: Pattern = {
     "Update Timing: Updating the global result (maxLen) at the wrong time. Usually, you update it after the shrink loop ensures the window is valid again.",
     "Initialization: Not handling the case where the input array is smaller than the window size K."
   ],
-  codeExample: `function slidingWindow(arr: number[], k: number): number {
+  codeExample: {
+    typescript: `function slidingWindow(arr: number[], k: number): number {
   let maxSum = 0;
   let windowSum = 0;
   let windowStart = 0;
@@ -33,6 +34,69 @@ export const slidingWindow: Pattern = {
   }
   return maxSum;
 }`,
+    python: `def sliding_window(arr: list[int], k: int) -> int:
+    max_sum = 0
+    window_sum = 0
+    window_start = 0
+
+    for window_end in range(len(arr)):
+        window_sum += arr[window_end]  # Add (Expand)
+
+        if window_end >= k - 1:  # Window size met
+            max_sum = max(max_sum, window_sum)
+            window_sum -= arr[window_start]  # Subtract (Shrink)
+            window_start += 1  # Slide
+
+    return max_sum`,
+    java: `public static int slidingWindow(int[] arr, int k) {
+    int maxSum = 0;
+    int windowSum = 0;
+    int windowStart = 0;
+
+    for (int windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+        windowSum += arr[windowEnd]; // Add (Expand)
+
+        if (windowEnd >= k - 1) { // Window size met
+            maxSum = Math.max(maxSum, windowSum);
+            windowSum -= arr[windowStart]; // Subtract (Shrink)
+            windowStart++; // Slide
+        }
+    }
+    return maxSum;
+}`,
+    cpp: `int slidingWindow(const vector<int>& arr, int k) {
+    int maxSum = 0;
+    int windowSum = 0;
+    int windowStart = 0;
+
+    for (int windowEnd = 0; windowEnd < arr.size(); windowEnd++) {
+        windowSum += arr[windowEnd]; // Add (Expand)
+
+        if (windowEnd >= k - 1) { // Window size met
+            maxSum = max(maxSum, windowSum);
+            windowSum -= arr[windowStart]; // Subtract (Shrink)
+            windowStart++; // Slide
+        }
+    }
+    return maxSum;
+}`,
+    javascript: `function slidingWindow(arr, k) {
+  let maxSum = 0;
+  let windowSum = 0;
+  let windowStart = 0;
+
+  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    windowSum += arr[windowEnd]; // Add (Expand)
+
+    if (windowEnd >= k - 1) { // Window size met
+      maxSum = Math.max(maxSum, windowSum);
+      windowSum -= arr[windowStart]; // Subtract (Shrink)
+      windowStart++; // Slide
+    }
+  }
+  return maxSum;
+}`
+  },
   problems: [
     { 
       id: 'sw-1', 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { ProgressProvider } from './context/ProgressContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { PATTERNS } from './data';
 import Dashboard from './pages/Dashboard';
 import PatternDetail from './pages/PatternDetail';
@@ -59,8 +60,9 @@ const App: React.FC = () => {
   const totalProblemsCount = PATTERNS.reduce((acc, curr) => acc + curr.problems.length, 0);
 
   return (
-    <ProgressProvider totalProblemsCount={totalProblemsCount}>
-      <HashRouter>
+    <LanguageProvider>
+      <ProgressProvider totalProblemsCount={totalProblemsCount}>
+        <HashRouter>
         <div className="min-h-screen bg-background flex flex-col font-sans text-slate-200 selection:bg-primary/30 selection:text-primary-100">
           
           <Navbar />
@@ -85,6 +87,7 @@ const App: React.FC = () => {
         </div>
       </HashRouter>
     </ProgressProvider>
+    </LanguageProvider>
   );
 };
 

@@ -17,7 +17,8 @@ export const fastSlowPointers: Pattern = {
     "Cycle Start Logic: Detecting the cycle is Part 1. Finding the *start* of the cycle is Part 2 (reset one pointer to head, move both 1 step). Don't mix them up.",
     "Cycle Length: To find length, once they meet, keep 'slow' there and move 'current' until it hits 'slow' again, counting steps."
   ],
-  codeExample: `function hasCycle(head: ListNode | null): boolean {
+  codeExample: {
+    typescript: `function hasCycle(head: ListNode | null): boolean {
   let slow = head;
   let fast = head;
 
@@ -28,6 +29,51 @@ export const fastSlowPointers: Pattern = {
   }
   return false;
 }`,
+    python: `function hasCycle(head: ListNode | null): boolean {
+  slow = head;
+  fast = head;
+
+  while (fast !== null && fast.next !== null) {
+    fast = fast.next.next;
+    slow = slow!.next;
+    if (slow === fast) return true
+  
+  return false;
+`,
+    java: `function hasCycle(head: ListNode | null): boolean {
+  int slow = head;
+  int fast = head;
+
+  while (fast !== null && fast.next !== null) {
+    fast = fast.next.next;
+    slow = slow!.next;
+    if (slow === fast) return true;
+  }
+  return false;
+}`,
+    cpp: `function hasCycle(head: ListNode | null): boolean {
+  int slow = head;
+  int fast = head;
+
+  while (fast !== null && fast.next !== null) {
+    fast = fast.next.next;
+    slow = slow!.next;
+    if (slow === fast) return true;
+  }
+  return false;
+}`,
+    javascript: `function hasCycle(head: ListNode | null) {
+  let slow = head;
+  let fast = head;
+
+  while (fast !== null && fast.next !== null) {
+    fast = fast.next.next;
+    slow = slow!.next;
+    if (slow === fast) return true;
+  }
+  return false;
+}`
+  },
   problems: [
     { id: 'fs-1', title: 'LinkedList Cycle', difficulty: Difficulty.Easy, leetcodeUrl: 'https://leetcode.com/problems/linked-list-cycle/', hints: createHints("Fast moves 2 steps, Slow moves 1 step.", "while (fast && fast.next) { ... }", "If fast reaches null, no cycle.") },
     { id: 'fs-2', title: 'Middle of LinkedList', difficulty: Difficulty.Easy, leetcodeUrl: 'https://leetcode.com/problems/middle-of-the-linked-list/', hints: createHints("When Fast reaches the end, Slow will be exactly at the middle.", "Loop while fast != null && fast.next != null.", "Handle even/odd lengths naturally by the loop condition.") },

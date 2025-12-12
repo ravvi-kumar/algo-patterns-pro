@@ -17,30 +17,165 @@ export const twoHeaps: Pattern = {
     "Direction Confusion: Putting large numbers in the Max-Heap or small numbers in the Min-Heap breaks the order. Max-Heap should store the 'left' side (smaller numbers), Min-Heap should store 'right' side (larger numbers).",
     "Language limitation: JavaScript has no built-in Heap. You often need to implement a simple class or assume one exists in an interview setting."
   ],
-  codeExample: `class MedianFinder {
-  // maxHeap for lower half, minHeap for upper half
-  addNum(num) {
-    if (this.maxHeap.isEmpty() || num < this.maxHeap.peek()) {
+  codeExample: {
+    typescript: `class MedianFinder {
+  private maxHeap: number[] = []; // Lower half
+  private minHeap: number[] = []; // Upper half
+
+  addNum(num: number): void {
+    // Add to maxHeap first
+    if (this.maxHeap.length === 0 || num <= this.maxHeap[0]) {
       this.maxHeap.push(num);
+      this.maxHeap.sort((a, b) => b - a); // Max heap (descending)
     } else {
       this.minHeap.push(num);
+      this.minHeap.sort((a, b) => a - b); // Min heap (ascending)
     }
-    
+
     // Rebalance
-    if (this.maxHeap.size() > this.minHeap.size() + 1) {
-      this.minHeap.push(this.maxHeap.pop());
-    } else if (this.minHeap.size() > this.maxHeap.size()) {
-      this.maxHeap.push(this.minHeap.pop());
+    if (this.maxHeap.length > this.minHeap.length + 1) {
+      const val = this.maxHeap.shift()!;
+      this.minHeap.push(val);
+      this.minHeap.sort((a, b) => a - b);
+    } else if (this.minHeap.length > this.maxHeap.length) {
+      const val = this.minHeap.shift()!;
+      this.maxHeap.push(val);
+      this.maxHeap.sort((a, b) => b - a);
+    }
+  }
+
+  findMedian(): number {
+    if (this.maxHeap.length > this.minHeap.length) {
+      return this.maxHeap[0];
+    }
+    return (this.maxHeap[0] + this.minHeap[0]) / 2;
+  }
+}`,
+    python: `import heapq
+
+class MedianFinder:
+    def __init__(self):
+        self.max_heap = []  # Lower half (max heap using negative values)
+        self.min_heap = []  # Upper half (min heap)
+
+    def add_num(self, num: int) -> None:
+        # Add to max heap first (using negative for max heap)
+        if not self.max_heap or num <= -self.max_heap[0]:
+            heapq.heappush(self.max_heap, -num)
+        else:
+            heapq.heappush(self.min_heap, num)
+
+        # Rebalance
+        if len(self.max_heap) > len(self.min_heap) + 1:
+            val = -heapq.heappop(self.max_heap)
+            heapq.heappush(self.min_heap, val)
+        elif len(self.min_heap) > len(self.max_heap):
+            val = heapq.heappop(self.min_heap)
+            heapq.heappush(self.max_heap, -val)
+
+    def find_median(self) -> float:
+        if len(self.max_heap) > len(self.min_heap):
+            return -self.max_heap[0]
+        return (-self.max_heap[0] + self.min_heap[0]) / 2`,
+    java: `class MedianFinder {
+    private PriorityQueue<Integer> maxHeap; // Lower half
+    private PriorityQueue<Integer> minHeap; // Upper half
+
+    public MedianFinder() {
+        maxHeap = new PriorityQueue<>((a, b) -> Integer.compare(b, a)); // Max heap
+        minHeap = new PriorityQueue<>(); // Min heap
+    }
+
+    public void addNum(int num) {
+        // Add to max heap first
+        if (maxHeap.isEmpty() || num <= maxHeap.peek()) {
+            maxHeap.offer(num);
+        } else {
+            minHeap.offer(num);
+        }
+
+        // Rebalance
+        if (maxHeap.size() > minHeap.size() + 1) {
+            minHeap.offer(maxHeap.poll());
+        } else if (minHeap.size() > maxHeap.size()) {
+            maxHeap.offer(minHeap.poll());
+        }
+    }
+
+    public double findMedian() {
+        if (maxHeap.size() > minHeap.size()) {
+            return maxHeap.peek();
+        }
+        return (maxHeap.peek() + minHeap.peek()) / 2.0;
+    }
+}`,
+    cpp: `class MedianFinder {
+private:
+    priority_queue<int> maxHeap; // Lower half (max heap)
+    priority_queue<int, vector<int>, greater<int>> minHeap; // Upper half (min heap)
+
+public:
+    void addNum(int num) {
+        // Add to max heap first
+        if (maxHeap.empty() || num <= maxHeap.top()) {
+            maxHeap.push(num);
+        } else {
+            minHeap.push(num);
+        }
+
+        // Rebalance
+        if (maxHeap.size() > minHeap.size() + 1) {
+            minHeap.push(maxHeap.top());
+            maxHeap.pop();
+        } else if (minHeap.size() > maxHeap.size()) {
+            maxHeap.push(minHeap.top());
+            minHeap.pop();
+        }
+    }
+
+    double findMedian() {
+        if (maxHeap.size() > minHeap.size()) {
+            return maxHeap.top();
+        }
+        return (maxHeap.top() + minHeap.top()) / 2.0;
+    }
+};`,
+    javascript: `class MedianFinder {
+  constructor() {
+    this.maxHeap = []; // Lower half (using negative for max heap simulation)
+    this.minHeap = []; // Upper half
+  }
+
+  addNum(num) {
+    // Add to max heap first (using negative values)
+    if (this.maxHeap.length === 0 || num <= -this.maxHeap[0]) {
+      this.maxHeap.push(-num);
+      this.maxHeap.sort((a, b) => a - b); // Sort to maintain heap property
+    } else {
+      this.minHeap.push(num);
+      this.minHeap.sort((a, b) => a - b);
+    }
+
+    // Rebalance
+    if (this.maxHeap.length > this.minHeap.length + 1) {
+      const val = -this.maxHeap.shift();
+      this.minHeap.push(val);
+      this.minHeap.sort((a, b) => a - b);
+    } else if (this.minHeap.length > this.maxHeap.length) {
+      const val = this.minHeap.shift();
+      this.maxHeap.push(-val);
+      this.maxHeap.sort((a, b) => a - b);
     }
   }
 
   findMedian() {
-    if (this.maxHeap.size() > this.minHeap.size()) {
-      return this.maxHeap.peek();
+    if (this.maxHeap.length > this.minHeap.length) {
+      return -this.maxHeap[0];
     }
-    return (this.maxHeap.peek() + this.minHeap.peek()) / 2.0;
+    return (-this.maxHeap[0] + this.minHeap[0]) / 2;
   }
-}`,
+}`
+  },
   problems: [
     {
       id: 'th-1',
@@ -48,9 +183,9 @@ export const twoHeaps: Pattern = {
       difficulty: Difficulty.Hard,
       leetcodeUrl: 'https://leetcode.com/problems/find-median-from-data-stream/',
       hints: createHints(
-        "Maintain a Max-Heap (small half) and a Min-Heap (large half).",
-        "If heaps are even size, median is average of tops. If odd, median is top of the larger heap.",
-        "Always rebalance after insertion so size difference is at most 1."
+        "Use two heaps: max heap for lower half, min heap for upper half.",
+        "Keep size difference <= 1.",
+        "Median is either top of larger heap or average of both tops."
       )
     },
     {
@@ -59,20 +194,9 @@ export const twoHeaps: Pattern = {
       difficulty: Difficulty.Hard,
       leetcodeUrl: 'https://leetcode.com/problems/sliding-window-median/',
       hints: createHints(
-        "Combine Sliding Window with Two Heaps.",
-        "When sliding window moves, you must remove the outgoing element from the heaps. Lazy removal (hash map of elements to delete) is a common trick since standard heaps don't support random deletion O(log N).",
-        "Balance the heaps after lazy removal."
-      )
-    },
-    {
-      id: 'th-3',
-      title: 'IPO',
-      difficulty: Difficulty.Hard,
-      leetcodeUrl: 'https://leetcode.com/problems/ipo/',
-      hints: createHints(
-        "Use a Min-Heap to store projects by 'Capital' required (so you can see what you can afford).",
-        "Use a Max-Heap to store affordable projects by 'Profit' (to pick the best one).",
-        "Move all affordable projects from Min-Heap to Max-Heap, then pop the Max-Heap."
+        "Two heaps with lazy deletion for sliding window.",
+        "Remove elements that slide out of window.",
+        "Rebalance after each removal and insertion."
       )
     }
   ]

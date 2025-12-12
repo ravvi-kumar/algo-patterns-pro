@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PATTERNS } from '../data';
 import { useProgress } from '../context/ProgressContext';
+import { useLanguage } from '../context/LanguageContext';
 import { CodeBlock } from '../components/CodeBlock';
 import { AIHelpModal } from '../components/AIHelpModal';
 import { ProblemCard } from '../components/ProblemCard';
-import { 
-  ArrowLeft, 
-  Sparkles, 
-  Target, 
-  Code2, 
-  Lightbulb, 
-  AlertTriangle, 
-  CheckCircle2, 
+import { LanguageSelector } from '../components/LanguageSelector';
+import {
+  ArrowLeft,
+  Sparkles,
+  Target,
+  Code2,
+  Lightbulb,
+  AlertTriangle,
+  CheckCircle2,
   GraduationCap,
   Layers
 } from 'lucide-react';
@@ -22,6 +24,7 @@ const PatternDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const pattern = PATTERNS.find(p => p.id === id);
   const { isProblemCompleted } = useProgress();
+  const { selectedLanguage } = useLanguage();
   const [isAIModalOpen, setIsAIModalOpen] = useState(false);
 
   if (!pattern) {
@@ -165,17 +168,20 @@ const PatternDetail: React.FC = () => {
 
           {/* Code Template */}
           <section>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-slate-700/50 rounded-lg text-slate-300">
-                <Code2 size={24} />
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-slate-700/50 rounded-lg text-slate-300">
+                  <Code2 size={24} />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-white">Code Blueprint</h2>
+                  <p className="text-slate-500 text-sm mt-1">Universal template for {pattern.title} problems</p>
+                </div>
               </div>
-              <div>
-                <h2 className="text-2xl font-bold text-white">Code Blueprint</h2>
-                <p className="text-slate-500 text-sm mt-1">Universal template for {pattern.title} problems</p>
-              </div>
+              <LanguageSelector />
             </div>
             <div className='overflow-x-auto max-w-sm md:max-w-none'>
-            <CodeBlock code={pattern.codeExample} />
+            <CodeBlock code={pattern.codeExample[selectedLanguage]} />
             </div>
           </section>
         </div>
@@ -188,10 +194,7 @@ const PatternDetail: React.FC = () => {
               <h3 className="text-lg font-bold text-white">Curated Exercises</h3>
             </div>
             
-            <div className="space-y-4 relative">
-              {/* Vertical line connecting problems */}
-              <div className="absolute left-7 top-5 my-4 bottom-4 w-px bg-slate-800 -z-10 hidden sm:block"></div>
-              
+            <div className="space-y-4">
               {pattern.problems.map((problem) => (
                 <ProblemCard key={problem.id} problem={problem} />
               ))}

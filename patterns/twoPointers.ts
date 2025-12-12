@@ -17,19 +17,75 @@ export const twoPointers: Pattern = {
     "Infinite Loops: Forgetting to increment 'left' or decrement 'right' inside an else block or complex condition.",
     "Unsorted Input: Forgetting that this pattern usually requires the input to be sorted first. If it's not sorted, you might need to sort it (O(N log N))."
   ],
-  codeExample: `function pairWithTargetSum(arr: number[], targetSum: number): number[] {
+  codeExample: {
+    typescript: `function pairWithTargetSum(arr: number[], targetSum: number): number[] {
   let left = 0;
   let right = arr.length - 1;
 
   while (left < right) {
     const currentSum = arr[left] + arr[right];
     if (currentSum === targetSum) return [left, right];
-    
+
     if (targetSum > currentSum) left++; // Need larger sum
     else right--; // Need smaller sum
   }
   return [-1, -1];
 }`,
+    python: `def pair_with_target_sum(arr: List[int], target_sum: int) -> List[int]:
+    left = 0
+    right = len(arr) - 1
+
+    while left < right:
+        current_sum = arr[left] + arr[right]
+        if current_sum == target_sum:
+            return [left, right]
+
+        if target_sum > current_sum:
+            left += 1  # Need larger sum
+        else:
+            right -= 1  # Need smaller sum
+
+    return [-1, -1]`,
+    java: `public static int[] pairWithTargetSum(int[] arr, int targetSum) {
+    int left = 0;
+    int right = arr.length - 1;
+
+    while (left < right) {
+        int currentSum = arr[left] + arr[right];
+        if (currentSum == targetSum) return new int[]{left, right};
+
+        if (targetSum > currentSum) left++; // Need larger sum
+        else right--; // Need smaller sum
+    }
+    return new int[]{-1, -1};
+}`,
+    cpp: `vector<int> pairWithTargetSum(const vector<int>& arr, int targetSum) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left < right) {
+        int currentSum = arr[left] + arr[right];
+        if (currentSum == targetSum) return {left, right};
+
+        if (targetSum > currentSum) left++; // Need larger sum
+        else right--; // Need smaller sum
+    }
+    return {-1, -1};
+}`,
+    javascript: `function pairWithTargetSum(arr, targetSum) {
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left < right) {
+    const currentSum = arr[left] + arr[right];
+    if (currentSum === targetSum) return [left, right];
+
+    if (targetSum > currentSum) left++; // Need larger sum
+    else right--; // Need smaller sum
+  }
+  return [-1, -1];
+}`
+  },
   problems: [
     { 
       id: 'tp-1', 

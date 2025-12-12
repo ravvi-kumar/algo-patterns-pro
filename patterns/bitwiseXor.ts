@@ -17,13 +17,41 @@ export const bitwiseXor: Pattern = {
     "Negative Numbers: JS bitwise operations treat numbers as 32-bit signed integers. Be careful with overflow if numbers are huge.",
     "Not Magic: It only works for specific frequency problems (e.g., finding the element appearing odd number of times)."
   ],
-  codeExample: `function findSingleNumber(arr: number[]): number {
+  codeExample: {
+    typescript: `function findSingleNumber(arr: number[]): number {
   let result = 0;
   for (const num of arr) {
     result = result ^ num;
   }
   return result;
 }`,
+    python: `def find_single_number(arr: List[int]) -> int:
+    result = 0
+    for num in arr:
+        result = result ^ num
+    return result`,
+    java: `public static int findSingleNumber(int[] arr) {
+    int result = 0;
+    for (int num : arr) {
+        result = result ^ num;
+    }
+    return result;
+}`,
+    cpp: `int findSingleNumber(const vector<int>& arr) {
+    int result = 0;
+    for (int num : arr) {
+        result = result ^ num;
+    }
+    return result;
+}`,
+    javascript: `function findSingleNumber(arr) {
+  let result = 0;
+  for (const num of arr) {
+    result = result ^ num;
+  }
+  return result;
+}`
+  },
   problems: [
     {
       id: 'xor-1',

@@ -13,11 +13,12 @@ export const subsets: Pattern = {
     "Duplicates: If input has duplicates, sort it first. Skip adjacent duplicates in the backtracking loop to avoid identical subsets."
   ],
   commonPitfalls: [
-    "Reference Issues: In JS/TS, pushing the \`currentSubset\` array directly will push a reference. You must push a copy: \`result.push([...currentSubset])\`.",
+    "Reference Issues: In JS/TS, pushing the `currentSubset` array directly will push a reference. You must push a copy: `result.push([...currentSubset])`.",
     "Base Cases: In recursion, knowing when to return or when to push to result is key.",
     "Time Complexity: These are exponential O(2^N) or O(N!). Don't try to use this for N > 20."
   ],
-  codeExample: `function subsets(nums: number[]): number[][] {
+  codeExample: {
+    typescript: `function subsets(nums: number[]): number[][] {
   const result: number[][] = [];
   const subset: number[] = [];
 
@@ -39,6 +40,93 @@ export const subsets: Pattern = {
   dfs(0);
   return result;
 }`,
+    python: `def subsets(nums: List[int]) -> List[List[int]]:
+    result = []
+    subset = []
+
+    def dfs(i: int):
+        if i >= len(nums):
+            result.append(subset.copy())  # Copy!
+            return
+
+        # Include nums[i]
+        subset.append(nums[i])
+        dfs(i + 1)
+
+        # Exclude nums[i] (Backtrack)
+        subset.pop()
+        dfs(i + 1)
+
+    dfs(0)
+    return result`,
+    java: `public static List<List<Integer>> subsets(int[] nums) {
+    List<List<Integer>> result = new ArrayList<>();
+    List<Integer> subset = new ArrayList<>();
+
+    dfs(nums, 0, subset, result);
+    return result;
+}
+
+private static void dfs(int[] nums, int i, List<Integer> subset, List<List<Integer>> result) {
+    if (i >= nums.length) {
+        result.add(new ArrayList<>(subset)); // Copy!
+        return;
+    }
+
+    // Include nums[i]
+    subset.add(nums[i]);
+    dfs(nums, i + 1, subset, result);
+
+    // Exclude nums[i] (Backtrack)
+    subset.remove(subset.size() - 1);
+    dfs(nums, i + 1, subset, result);
+}`,
+    cpp: `vector<vector<int>> subsets(const vector<int>& nums) {
+    vector<vector<int>> result;
+    vector<int> subset;
+
+    dfs(nums, 0, subset, result);
+    return result;
+}
+
+private:
+void dfs(const vector<int>& nums, int i, vector<int>& subset, vector<vector<int>>& result) {
+    if (i >= nums.size()) {
+        result.push_back(subset); // Copy!
+        return;
+    }
+
+    // Include nums[i]
+    subset.push_back(nums[i]);
+    dfs(nums, i + 1, subset, result);
+
+    // Exclude nums[i] (Backtrack)
+    subset.pop_back();
+    dfs(nums, i + 1, subset, result);
+}`,
+    javascript: `function subsets(nums) {
+  const result = [];
+  const subset = [];
+
+  function dfs(i) {
+    if (i >= nums.length) {
+      result.push([...subset]); // Copy!
+      return;
+    }
+
+    // Include nums[i]
+    subset.push(nums[i]);
+    dfs(i + 1);
+
+    // Exclude nums[i] (Backtrack)
+    subset.pop();
+    dfs(i + 1);
+  }
+
+  dfs(0);
+  return result;
+}`
+  },
   problems: [
     {
       id: 'sub-1',

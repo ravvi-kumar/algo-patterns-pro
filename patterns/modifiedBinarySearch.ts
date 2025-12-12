@@ -17,7 +17,8 @@ export const modifiedBinarySearch: Pattern = {
     "Order Agnostic: Assuming the array is always ascending. Sometimes you need to check \`arr[start] < arr[end]\` to determine direction.",
     "Floor/Ceil: When finding 'next letter' or 'closest element', the answer usually lies at \`start\` or \`end\` after the loop breaks."
   ],
-  codeExample: `function binarySearch(arr: number[], target: number): number {
+  codeExample: {
+    typescript: `function binarySearch(arr: number[], target: number): number {
   let start = 0;
   let end = arr.length - 1;
 
@@ -34,6 +35,75 @@ export const modifiedBinarySearch: Pattern = {
   }
   return -1;
 }`,
+    python: `def binarySearch(arr: number[], target: number) -> int:
+  start = 0;
+  end = arrlen() - 1;
+
+  while (start <= end) {
+    mid = Math.floor(start + (end - start) / 2);
+
+    if (target === arr[mid]) return mid
+    
+    if target < arr[mid]:
+      end = mid - 1;
+     else:
+      start = mid + 1;
+    
+  
+  return -1;
+`,
+    java: `public static int binarySearch(arrint[], target: number) {
+  int start = 0;
+  int end = arr.length - 1;
+
+  while (start <= end) {
+    int mid = Math.floor(start + (end - start) / 2);
+
+    if (target === arr[mid]) return mid;
+    
+    if (target < arr[mid]) {
+      end = mid - 1;
+    } else {
+      start = mid + 1;
+    }
+  }
+  return -1;
+}`,
+    cpp: `int binarySearch(arrvector<int>, target: number) {
+  int start = 0;
+  int end = arr.size() - 1;
+
+  while (start <= end) {
+    const int mid = Math.floor(start + (end - start) / 2);
+
+    if (target === arr[mid]) return mid;
+    
+    if (target < arr[mid]) {
+      end = mid - 1;
+    } else {
+      start = mid + 1;
+    }
+  }
+  return -1;
+}`,
+    javascript: `function binarySearch(arr[], target) {
+  let start = 0;
+  let end = arr.length - 1;
+
+  while (start <= end) {
+    const mid = Math.floor(start + (end - start) / 2);
+
+    if (target === arr[mid]) return mid;
+    
+    if (target < arr[mid]) {
+      end = mid - 1;
+    } else {
+      start = mid + 1;
+    }
+  }
+  return -1;
+}`
+  },
   problems: [
     {
       id: 'mbs-1',
