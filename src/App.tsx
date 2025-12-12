@@ -32,6 +32,7 @@ const App: React.FC = () => {
                 </ProtectedRoute>
               } />
             </Route>
+            <Route path="*" element={<div>404 - Page Not Found</div>} />
           </Routes>
       </ProgressProvider>
     </LanguageProvider>
