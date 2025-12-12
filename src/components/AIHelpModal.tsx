@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { X, Sparkles, Send } from 'lucide-react';
-import { getAIExplanation } from '../services/geminiService';
 import ReactMarkdown from 'react-markdown';
 
 interface AIHelpModalProps {
@@ -20,14 +19,14 @@ export const AIHelpModal: React.FC<AIHelpModalProps> = ({ isOpen, onClose, patte
     if (!query.trim()) return;
     setLoading(true);
     setResponse(null);
-    try {
-      const result = await getAIExplanation(patternTitle, query);
-      setResponse(result);
-    } catch (e) {
-      setResponse("Failed to fetch response.");
-    } finally {
-      setLoading(false);
-    }
+    // try {
+    //   const result = await getAIExplanation(patternTitle, query);
+    //   setResponse(result);
+    // } catch (e) {
+    //   setResponse("Failed to fetch response.");
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (
