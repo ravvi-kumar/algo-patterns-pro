@@ -1,12 +1,12 @@
-import React from 'react';
-import { Outlet, Link, useLocation } from 'react-router';
-import UserAvatar from './UserAvatar';
-import { Github, Code2, LayoutGrid, Menu } from 'lucide-react';
 import {
   SignedIn,
   SignedOut,
   SignInButton,
 } from '@clerk/clerk-react';
+import { Code2, LayoutGrid } from 'lucide-react';
+import React from 'react';
+import { Link, Outlet, useLocation } from 'react-router';
+import UserAvatar from './UserAvatar';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -34,17 +34,15 @@ const Navbar: React.FC = () => {
                     <span className="hidden sm:inline">Patterns</span>
                   </Link>
                   <div className="h-4 w-px bg-slate-800 hidden sm:block"></div>
-               <a href="https://leetcode.com" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-slate-400 hover:text-white transition-colors hidden sm:block">
-              LeetCode
-            </a>
+                  <a href="https://leetcode.com" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-slate-400 hover:text-white transition-colors hidden sm:block">
+                    LeetCode
+                  </a>
                 </>
               )}
             </SignedIn>
 
             <SignedOut>
-              <SignInButton mode="modal"
-              forceRedirectUrl="/dashboard"
-              >
+              <SignInButton mode="modal">
                 <button className="text-sm font-bold text-white bg-primary px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
                   Sign In
                 </button>
@@ -53,10 +51,10 @@ const Navbar: React.FC = () => {
 
             <SignedIn>
               {isLanding && (
-              <Link to="/dashboard" className="text-sm font-bold text-white bg-primary px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                <Link to="/dashboard" className="text-sm font-bold text-white bg-primary px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
                   Dashboard
-               </Link>
-)}
+                </Link>
+              )}
               <UserAvatar />
             </SignedIn>
 
