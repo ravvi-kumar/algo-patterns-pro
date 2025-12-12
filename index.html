@@ -1,70 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Algo Patterns Pro</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              // Overriding slate with a sophisticated blue-gray palette
-              slate: {
-                50: '#f2f4f8',
-                100: '#e1e4ed',
-                200: '#c4c9d7',
-                300: '#9fa7bc',
-                400: '#7c86a0',
-                500: '#5f6984',
-                600: '#485066',
-                700: '#343a4b', // Borders
-                800: '#232735', // Cards / Secondary Surface
-                900: '#161924', // Surface
-                950: '#0b0c13', // Background
-              },
-              background: '#0b0c13', // Deep rich dark
-              surface: '#161924',    // Slightly lighter
-              primary: '#6366f1',    // Indigo 500 (Sophisticated Blue/Purple)
-              secondary: '#7c86a0',  // Slate 400
-              accent: '#8b5cf6',     // Violet 500
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-            },
-            boxShadow: {
-              'glow': '0 0 20px -5px rgba(99, 102, 241, 0.15)',
-            }
-          },
-        },
-      };
-    </script>
-    <style>
-      body {
-        background-color: #0b0c13;
-        color: #c4c9d7; /* Slate 200 */
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0b0c13;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #343a4b;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #485066;
-      }
-    </style>
-<link rel="stylesheet" href="/index.css">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Algo Patterns Pro</title>
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body>
-    <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/main.tsx"></script>
 </body>
+
 </html>
